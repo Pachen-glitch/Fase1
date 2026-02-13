@@ -1,11 +1,22 @@
 package main.java.com.edu.interpreter.engine;
-/*
-La pila principal
 
-Estado del trace
+import main.java.com.edu.interpreter.stack.ScriptStack;
 
-Estado de condicionales (IF/ELSE)
-*/
 public class ExecutionContext {
-    
+
+    private ScriptStack stack = new ScriptStack();
+
+    private byte[] currentData;
+
+    public ScriptStack getStack() {
+        return stack;
+    }
+
+    public byte[] getCurrentData() {
+        return currentData;
+    }
+
+    public void setCurrentData(byte[] data) {
+        this.currentData = data;
+    }
 }
