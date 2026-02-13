@@ -1,7 +1,7 @@
 package main.java.com.edu.interpreter.stack;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Deque;// recomendado en ves de STACK
 
 public class ScriptStack {
 
