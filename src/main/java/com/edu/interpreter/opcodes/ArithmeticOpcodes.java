@@ -1,5 +1,7 @@
 package main.java.com.edu.interpreter.opcodes;
 
+import main.java.com.edu.interpreter.exception.ScriptException;
+
 public class ArithmeticOpcodes {
 
     public static void register(OpcodeRegistry registry){
@@ -23,13 +25,10 @@ public class ArithmeticOpcodes {
         // OP_ADD
         registry.register("OP_ADD", (context) -> {
 
-            byte[] b1 = context.getStack().pop();
-            byte[] b2 = context.getStack().pop();
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
 
-            int n1 = Integer.parseInt(new String(b1));
-            int n2 = Integer.parseInt(new String(b2));
-
-            int result = n2 + n1; // importante el orden
+            int result = n2 + n1;
 
             context.getStack().push(
                     String.valueOf(result).getBytes()
@@ -39,11 +38,8 @@ public class ArithmeticOpcodes {
         // OP_SUB
         registry.register("OP_SUB", (context) -> {
 
-            byte[] b1 = context.getStack().pop();
-            byte[] b2 = context.getStack().pop();
-
-            int n1 = Integer.parseInt(new String(b1));
-            int n2 = Integer.parseInt(new String(b2));
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
 
             int result = n2 - n1;
 
@@ -55,16 +51,69 @@ public class ArithmeticOpcodes {
         // OP_GREATERTHAN
         registry.register("OP_GREATERTHAN", (context) -> {
 
-            byte[] b1 = context.getStack().pop();
-            byte[] b2 = context.getStack().pop();
-
-            int n1 = Integer.parseInt(new String(b1));
-            int n2 = Integer.parseInt(new String(b2));
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
 
             if(n2 > n1)
                 context.getStack().push("1".getBytes());
             else
                 context.getStack().push("0".getBytes());
         });
+
+        // OP_LESSTHAN
+        registry.register("OP_LESSTHAN", (context) -> {
+
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
+
+            if(n2 < n1)
+                context.getStack().push("1".getBytes());
+            else
+                context.getStack().push("0".getBytes());
+        });
+
+        // OP_GREATERTHANOREQUAL
+        registry.register("OP_GREATERTHANOREQUAL", (context) -> {
+
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
+
+            if(n2 >= n1)
+                context.getStack().push("1".getBytes());
+            else
+                context.getStack().push("0".getBytes());
+        });
+
+        // OP_LESSTHANOREQUAL
+        registry.register("OP_LESSTHANOREQUAL", (context) -> {
+
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
+
+            if(n2 <= n1)
+                context.getStack().push("1".getBytes());
+            else
+                context.getStack().push("0".getBytes());
+        });
+
+        // OP_NUMEQUALVERIFY
+        registry.register("OP_NUMEQUALVERIFY", (context) -> {
+
+            int n1 = toInt(context.getStack().pop());
+            int n2 = toInt(context.getStack().pop());
+
+            if(n2 != n1) {
+                throw new ScriptException("OP_NUMEQUALVERIFY failed");
+            }
+        });
+    }
+
+    // errores
+    private static int toInt(byte[] data) throws ScriptException {
+        try {
+            return Integer.parseInt(new String(data));
+        } catch (NumberFormatException e) {
+            throw new ScriptException("Invalid numeric value");
+        }
     }
 }

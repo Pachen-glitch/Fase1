@@ -2,6 +2,8 @@ package main.java.com.edu.interpreter.intepreter;
 
 import java.util.List;
 
+import main.java.com.edu.interpreter.engine.ExecutionContext;
+import main.java.com.edu.interpreter.engine.ScriptParser;
 import main.java.com.edu.interpreter.opcodes.*;
 
 public class ScriptInterpreter {
@@ -13,7 +15,6 @@ public class ScriptInterpreter {
         registry = new OpcodeRegistry();
         parser = new ScriptParser();
 
-        // Registrar todos los opcodes
         StackOpcodes.register(registry);
         ArithmeticOpcodes.register(registry);
         LogicOpcodes.register(registry);
@@ -21,30 +22,43 @@ public class ScriptInterpreter {
         ControlFlowOpcodes.register(registry);
     }
 
-    public boolean execute(String script) throws Exception {
+    public boolean execute(String script) {
 
-        ExecutionContext context = new ExecutionContext();
-        List<String> tokens = parser.parse(script);
+    ExecutionContext context = new ExecutionContext();
+    List<String> tokens = parser.parse(script);
+
+    try {
 
         for (String token : tokens) {
 
             Opcode opcode = registry.get(token);
 
+            if (!context.isExecuting()) {
+
+                if (opcode != null &&
+                   (token.equals("OP_ELSE") || token.equals("OP_ENDIF"))) {
+
+                    opcode.execute(context);
+                }
+
+                continue;
+            }
+
             if (opcode != null) {
                 opcode.execute(context);
             } else {
-                // Si no es opcode → es literal
                 context.getStack().push(token.getBytes());
             }
         }
 
-        // Validación final
-        if (context.getStack().isEmpty()) {
+        if (context.getStack().isEmpty())
             return false;
-        }
 
-        String result = new String(context.getStack().peek());
+        return !new String(context.getStack().peek()).equals("0");
 
-        return !result.equals("0");
+    } catch (Exception e) {
+        return false;
     }
+}
+
 }

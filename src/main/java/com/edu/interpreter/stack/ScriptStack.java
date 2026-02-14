@@ -1,33 +1,28 @@
 package main.java.com.edu.interpreter.stack;
 
 import java.util.ArrayDeque;
-import java.util.Deque;// recomendado en ves de STACK
+import java.util.Deque;
+
+import main.java.com.edu.interpreter.exception.ScriptException;
 
 public class ScriptStack {
 
-    private final Deque<byte[]> stack;
+    private final Deque<byte[]> stack = new ArrayDeque<>();
 
-    public ScriptStack() {
-        this.stack = new ArrayDeque<>();
-    }
-
-    // Push
     public void push(byte[] data) {
         stack.push(data);
     }
 
-    // Pop
-    public byte[] pop() {
+    public byte[] pop() throws ScriptException {
         if (stack.isEmpty()) {
-            throw new RuntimeException("Stack underflow");
+            throw new ScriptException("Stack underflow");
         }
         return stack.pop();
     }
 
-    // Peek
-    public byte[] peek() {
+    public byte[] peek() throws ScriptException {
         if (stack.isEmpty()) {
-            throw new RuntimeException("Stack is empty");
+            throw new ScriptException("Stack is empty");
         }
         return stack.peek();
     }
@@ -38,11 +33,5 @@ public class ScriptStack {
 
     public int size() {
         return stack.size();
-    }
-
-    // Método  para trace
-    public void printStack() {
-        System.out.println("Stack: ");
-        stack.forEach(item -> System.out.println(new String(item)));
     }
 }

@@ -5,13 +5,18 @@ import java.util.Map;
 
 public class OpcodeRegistry {
 
-    private Map<String, Opcode> registry = new HashMap<>();
+    private final Map<String, Opcode> registry = new HashMap<>();
 
     public void register(String name, Opcode opcode) {
-        registry.put(name, opcode);
+        registry.put(name.toUpperCase(), opcode);
     }
 
-    public Opcode get(String name) {
-        return registry.get(name);
+    public Opcode get(String name) throws ScriptException {
+    Opcode opcode = registry.get(name.toUpperCase());
+    if (opcode == null) {
+        throw new ScriptException("Unknown opcode: " + name);
     }
+    return opcode;
+}
+
 }
