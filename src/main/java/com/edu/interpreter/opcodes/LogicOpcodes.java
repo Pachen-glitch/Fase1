@@ -1,4 +1,4 @@
-package main.java.com.edu.interpreter.opcodes;
+package com.edu.interpreter.opcodes;
 
 import java.util.Arrays;
 

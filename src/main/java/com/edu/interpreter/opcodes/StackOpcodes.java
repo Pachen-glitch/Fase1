@@ -1,4 +1,6 @@
-package main.java.com.edu.interpreter.opcodes;
+package com.edu.interpreter.opcodes;
+
+import com.edu.interpreter.engine.ExecutionContext;
 
 public class StackOpcodes {
 

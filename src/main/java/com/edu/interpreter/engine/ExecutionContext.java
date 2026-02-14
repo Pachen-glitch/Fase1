@@ -1,6 +1,6 @@
-package main.java.com.edu.interpreter.engine;
+package com.edu.interpreter.engine;
 
-import main.java.com.edu.interpreter.stack.ScriptStack;
+import com.edu.interpreter.stack.ScriptStack;
 
 import java.util.Stack;
 

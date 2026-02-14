@@ -1,10 +1,8 @@
-package main.java.com.edu.interpreter.engine;
+package com.edu.interpreter.engine;
 
 import java.util.List;
 
-import main.java.com.edu.interpreter.engine.ExecutionContext;
-import main.java.com.edu.interpreter.engine.ScriptParser;
-import main.java.com.edu.interpreter.opcodes.*;
+import com.edu.interpreter.opcodes.*;
 
 public class ScriptInterpreter {
 
@@ -12,6 +10,7 @@ public class ScriptInterpreter {
     private final ScriptParser parser;
 
     public ScriptInterpreter() {
+
         registry = new OpcodeRegistry();
         parser = new ScriptParser();
 
@@ -24,41 +23,41 @@ public class ScriptInterpreter {
 
     public boolean execute(String script) {
 
-    ExecutionContext context = new ExecutionContext();
-    List<String> tokens = parser.parse(script);
+        ExecutionContext context = new ExecutionContext();
+        List<String> tokens = parser.parse(script);
 
-    try {
+        try {
 
-        for (String token : tokens) {
+            for (String token : tokens) {
 
-            Opcode opcode = registry.get(token);
+                Opcode opcode = registry.get(token);
 
-            if (!context.isExecuting()) {
+                if (!context.isExecuting()) {
 
-                if (opcode != null &&
-                   (token.equals("OP_ELSE") || token.equals("OP_ENDIF"))) {
+                    if (opcode != null &&
+                       (token.equals("OP_ELSE") || token.equals("OP_ENDIF"))) {
 
-                    opcode.execute(context);
+                        opcode.execute(context);
+                    }
+
+                    continue;
                 }
 
-                continue;
+                if (opcode != null) {
+                    opcode.execute(context);
+                } else {
+                    // Es literal
+                    context.getStack().push(token.getBytes());
+                }
             }
 
-            if (opcode != null) {
-                opcode.execute(context);
-            } else {
-                context.getStack().push(token.getBytes());
-            }
-        }
+            if (context.getStack().isEmpty())
+                return false;
 
-        if (context.getStack().isEmpty())
+            return !new String(context.getStack().peek()).equals("0");
+
+        } catch (Exception e) {
             return false;
-
-        return !new String(context.getStack().peek()).equals("0");
-
-    } catch (Exception e) {
-        return false;
+        }
     }
-}
-
 }

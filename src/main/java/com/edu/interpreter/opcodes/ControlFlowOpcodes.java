@@ -1,4 +1,6 @@
-package main.java.com.edu.interpreter.opcodes;
+package com.edu.interpreter.opcodes;
+
+import com.edu.interpreter.exception.ScriptException;
 
 public class ControlFlowOpcodes {
 
@@ -11,17 +13,17 @@ public class ControlFlowOpcodes {
             String v = new String(value);
 
             if(v.equals("0")){
-                throw new RuntimeException("OP_VERIFY failed");
+                throw new ScriptException("OP_VERIFY failed");
             }
         });
 
         // OP_RETURN
         registry.register("OP_RETURN", (context) -> {
-            throw new RuntimeException("Script terminated by OP_RETURN");
+            throw new ScriptException("Script terminated by OP_RETURN");
         });
 
         // OP_IF
-            registry.register("OP_IF", (context) -> {
+        registry.register("OP_IF", (context) -> {
 
             byte[] value = context.getStack().pop();
             boolean condition = !new String(value).equals("0");
@@ -36,11 +38,21 @@ public class ControlFlowOpcodes {
         // OP_ELSE
         registry.register("OP_ELSE", (context) -> {
 
-            boolean current = context.getConditionStack().pop();
-            boolean inverted = !current;
+            if(context.getConditionStack().isEmpty()){
+                throw new ScriptException("OP_ELSE without OP_IF");
+            }
 
-            context.getConditionStack().push(inverted);
-            context.setExecuting(inverted);
+            boolean previous = context.getConditionStack().pop();
+
+            boolean parentExecuting = true;
+            if(!context.getConditionStack().isEmpty()){
+                parentExecuting = context.getConditionStack().peek();
+            }
+
+            boolean newState = parentExecuting && !previous;
+
+            context.getConditionStack().push(newState);
+            context.setExecuting(newState);
         });
 
         // OP_ENDIF
@@ -58,6 +70,5 @@ public class ControlFlowOpcodes {
                 context.setExecuting(context.getConditionStack().peek());
             }
         });
-
     }
 }

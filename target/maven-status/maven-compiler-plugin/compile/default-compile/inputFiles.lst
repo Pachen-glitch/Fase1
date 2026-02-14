@@ -1,0 +1,14 @@
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\crypto\MockCrypto.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ExecutionContext.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ScriptInterpreter.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ScriptParser.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\exeption\ScriptException.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\Main.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\ArithmeticOpcodes.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\ControlFlowOpcodes.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\CryptoOpcodes.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\LogicOpcodes.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\Opcode.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\OpcodeRegistry.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\StackOpcodes.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\stack\ScriptStack.java

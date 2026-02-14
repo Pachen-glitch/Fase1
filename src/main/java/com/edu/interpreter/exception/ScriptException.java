@@ -1,4 +1,4 @@
-package main.java.com.edu.interpreter.exeption;
+package com.edu.interpreter.exception;
 
 public class ScriptException extends Exception {
 

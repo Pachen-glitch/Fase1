@@ -1,4 +1,4 @@
-package main.java.com.edu.interpreter.opcodes;
+package com.edu.interpreter.opcodes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +11,8 @@ public class OpcodeRegistry {
         registry.put(name.toUpperCase(), opcode);
     }
 
-    public Opcode get(String name) throws ScriptException {
-    Opcode opcode = registry.get(name.toUpperCase());
-    if (opcode == null) {
-        throw new ScriptException("Unknown opcode: " + name);
+    // NO lanzar excepción aquí
+    public Opcode get(String name) {
+        return registry.get(name.toUpperCase());
     }
-    return opcode;
-}
-
 }

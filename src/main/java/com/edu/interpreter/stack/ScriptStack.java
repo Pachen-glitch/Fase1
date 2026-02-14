@@ -1,9 +1,9 @@
-package main.java.com.edu.interpreter.stack;
+package com.edu.interpreter.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import main.java.com.edu.interpreter.exception.ScriptException;
+import com.edu.interpreter.exception.ScriptException;
 
 public class ScriptStack {
 
