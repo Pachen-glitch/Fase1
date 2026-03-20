@@ -1,0 +1,14 @@
+com\edu\interpreter\opcodes\Opcode.class
+com\edu\interpreter\stack\ScriptStack.class
+com\edu\interpreter\engine\ScriptParser.class
+com\edu\interpreter\exeption\ScriptException.class
+com\edu\interpreter\Main.class
+com\edu\interpreter\opcodes\ArithmeticOpcodes.class
+com\edu\interpreter\opcodes\StackOpcodes.class
+com\edu\interpreter\engine\ExecutionContext.class
+com\edu\interpreter\opcodes\ControlFlowOpcodes.class
+com\edu\interpreter\opcodes\LogicOpcodes.class
+com\edu\interpreter\crypto\MockCrypto.class
+com\edu\interpreter\engine\ScriptInterpreter.class
+com\edu\interpreter\opcodes\CryptoOpcodes.class
+com\edu\interpreter\opcodes\OpcodeRegistry.class

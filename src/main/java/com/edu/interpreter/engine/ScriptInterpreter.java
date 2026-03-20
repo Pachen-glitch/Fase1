@@ -1,8 +1,13 @@
-package main.java.com.edu.interpreter.engine;
+package com.edu.interpreter.engine;
 
-import main.java.com.edu.interpreter.opcodes.Opcode;
-import main.java.com.edu.interpreter.opcodes.OpcodeRegistry;
-import main.java.com.edu.interpreter.exception.ScriptException;
+import com.edu.interpreter.opcodes.Opcode;
+import com.edu.interpreter.opcodes.OpcodeRegistry;
+import com.edu.interpreter.exception.ScriptException;
+import com.edu.interpreter.opcodes.ArithmeticOpcodes;
+import com.edu.interpreter.opcodes.ControlFlowOpcodes;
+import com.edu.interpreter.opcodes.CryptoOpcodes;
+import com.edu.interpreter.opcodes.LogicOpcodes;
+import com.edu.interpreter.opcodes.StackOpcodes;
 import java.util.List;
 
 public class ScriptInterpreter {
@@ -12,6 +17,12 @@ public class ScriptInterpreter {
     public ScriptInterpreter() {
         this.registry = new OpcodeRegistry();
         this.context = new ExecutionContext();
+        
+        ArithmeticOpcodes.register(registry);
+        ControlFlowOpcodes.register(registry);
+        CryptoOpcodes.register(registry);
+        LogicOpcodes.register(registry);
+        StackOpcodes.register(registry);
     }
 
     public boolean execute(List<String> tokens, boolean trace) throws ScriptException {

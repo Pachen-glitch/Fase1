@@ -1,4 +1,4 @@
-package main.java.com.edu.interpreter.opcodes;
+package com.edu.interpreter.opcodes;
 
 import com.edu.interpreter.exception.ScriptException;
 
@@ -11,7 +11,9 @@ public class ControlFlowOpcodes {
             context.getStack().push(data);
         });
 
+        // OP_VERIFY
         registry.register("OP_VERIFY", (context) -> {
+
             byte[] value = context.getStack().pop();
             String v = new String(value);
 
@@ -20,11 +22,14 @@ public class ControlFlowOpcodes {
             }
         });
 
+        // OP_RETURN
         registry.register("OP_RETURN", (context) -> {
             throw new ScriptException("Script terminated by OP_RETURN");
         });
 
+        // OP_IF
         registry.register("OP_IF", (context) -> {
+
             byte[] value = context.getStack().pop();
             boolean condition = !new String(value).equals("0");
 
@@ -46,7 +51,9 @@ public class ControlFlowOpcodes {
             context.setExecuting(shouldExecute);
         });
 
+        // OP_ELSE
         registry.register("OP_ELSE", (context) -> {
+
             if(context.getConditionStack().isEmpty()){
                 throw new ScriptException("OP_ELSE without OP_IF");
             }
@@ -64,7 +71,9 @@ public class ControlFlowOpcodes {
             context.setExecuting(newState);
         });
 
+        // OP_ENDIF
         registry.register("OP_ENDIF", (context) -> {
+
             if(context.getConditionStack().isEmpty()){
                 throw new ScriptException("OP_ENDIF without OP_IF");
             }

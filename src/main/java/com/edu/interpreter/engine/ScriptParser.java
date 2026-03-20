@@ -1,4 +1,4 @@
-package main.java.com.edu.interpreter.engine;
+package com.edu.interpreter.engine;
 
 import java.util.Arrays;
 import java.util.List;
