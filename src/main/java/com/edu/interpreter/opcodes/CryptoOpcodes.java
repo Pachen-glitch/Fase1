@@ -29,5 +29,17 @@ public class CryptoOpcodes {
                 context.getStack().push("0".getBytes());
 
         });
+
+        registry.register("OP_SHA256", (context) -> {
+            byte[] value = context.getStack().pop();
+            String hash = "SHA256_" + new String(value);
+            context.getStack().push(hash.getBytes());
+        });
+
+        registry.register("OP_HASH256", (context) -> {
+            byte[] value = context.getStack().pop();
+            String hash = "HASH256_" + new String(value);
+            context.getStack().push(hash.getBytes());
+        });
     }
 }

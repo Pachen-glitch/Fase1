@@ -1,25 +1,27 @@
 package main.java.com.edu.interpreter;
 
-import main.java.com.edu.interpreter.opcodes.*;
-import main.java.com.edu.interpreter.engine.ExecutionContext;
+import com.edu.interpreter.engine.ScriptInterpreter;
+
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        ScriptInterpreter interpreter = new ScriptInterpreter();
+        boolean trace = false;
 
-        OpcodeRegistry registry = new OpcodeRegistry();
+        if (args.length > 0 && args[0].equals("--trace")) {
+            trace = true;
+            System.out.println("MODO TRACE ACTIVADO");
+        }
 
-        ArithmeticOpcodes.register(registry);
-        StackOpcodes.register(registry);
-        LogicOpcodes.register(registry);
-        CryptoOpcodes.register(registry);
+        System.out.println("DEMOSTRACIONES FASE 2");
 
-        ExecutionContext context = new ExecutionContext();
+        System.out.println("P2PKH Correcto");
+        System.out.println("Resultado: " + interpreter.execute("VALIDA PUBKEY OP_DUP OP_HASH160 HASH_PUBKEY OP_EQUALVERIFY OP_CHECKSIG", trace));
 
-        registry.get("OP_2").execute(context);
-        registry.get("OP_2").execute(context);
-        registry.get("OP_EQUAL").execute(context);
+        System.out.println("P2PKH Incorrecto");
+        System.out.println("Resultado: " + interpreter.execute("INVALIDA PUBKEY OP_DUP OP_HASH160 HASH_PUBKEY OP_EQUALVERIFY OP_CHECKSIG", trace));
 
-        context.getStack().printStack();
-
+        System.out.println("Condicional OP_IF/OP_ELSE");
+        System.out.println("Resultado: " + interpreter.execute("1 OP_IF 10 OP_ELSE 0 OP_ENDIF", trace));
     }
 }
