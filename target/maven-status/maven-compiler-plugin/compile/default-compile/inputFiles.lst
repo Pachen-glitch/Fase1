@@ -2,8 +2,8 @@ C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\crypt
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ExecutionContext.java
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ScriptInterpreter.java
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\engine\ScriptParser.java
-C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\exeption\ScriptException.java
-C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\Main.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\exception\ScriptException.java
+C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\main.java
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\ArithmeticOpcodes.java
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\ControlFlowOpcodes.java
 C:\Users\Admin\Documents\BITCOIN\Bitcoin\src\main\java\com\edu\interpreter\opcodes\CryptoOpcodes.java
